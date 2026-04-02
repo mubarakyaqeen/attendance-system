@@ -17,3 +17,7 @@ Thumbs.db
 
 # Env
 .env
+
+# To ignore the image posting because
+# it can grow bigger over time
+uploads/
