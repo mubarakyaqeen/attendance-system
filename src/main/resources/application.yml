@@ -6,15 +6,19 @@ spring:
     name: attendance-system
 
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/StudentAttendanceApp}
-    username: ${DB_USER:postgres}
-    password: ${DB_PASS:mubarak}
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
     open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 jwt:
   secret: thisIsASuperSecureKeyForJwtTokenGeneration123456789123456
