@@ -20,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")   // allow all (for now)
+                .allowedOrigins("https://yabatech-attendance-v8.onrender.com")   // allow all (for now)
                 .allowedMethods("*")
                 .allowedHeaders("*");
     }
