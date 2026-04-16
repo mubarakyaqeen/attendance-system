@@ -21,4 +21,5 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
      */
     List<Course> findByDepartmentIdAndLevel(Long departmentId, String level);
 
+    List<Course> findByDepartmentId(Long departmentId);
 }

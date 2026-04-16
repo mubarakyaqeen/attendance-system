@@ -238,12 +238,24 @@ public class StudentService {
             throw new RuntimeException("Student level not set");
         }
 
-        List<Course> filteredCourses = courseRepository
-                .findByDepartmentIdAndLevel(
-                        student.getDepartment().getId(),
-                        student.getLevel()
-                );
+        // ✅ NORMALIZE STUDENT LEVEL
+        String normalizedLevel = student.getLevel()
+                .replaceAll("\\s+", "")   // remove spaces
+                .toUpperCase();
 
+        // ✅ GET ALL COURSES IN SAME DEPARTMENT
+        List<Course> departmentCourses = courseRepository
+                .findByDepartmentId(student.getDepartment().getId());
+
+        // ✅ FILTER COURSES BY NORMALIZED LEVEL
+        List<Course> filteredCourses = departmentCourses.stream()
+                .filter(c -> c.getLevel() != null &&
+                        c.getLevel()
+                                .replaceAll("\\s+", "")
+                                .equalsIgnoreCase(normalizedLevel))
+                .toList();
+
+        // ✅ REMOVE ALREADY ENROLLED COURSES
         List<Enrollment> enrollments =
                 enrollmentRepository.findByStudentId(student.getId());
 
